@@ -24,6 +24,7 @@ export class AddIngredient implements Action{
   payload:Ingredient //data
 }
 ```
+here, the addIngredient implements Action, so we have to override the variable type from Action Interface.
 
 > ingredient.reducer.ts
 ``` typescript
