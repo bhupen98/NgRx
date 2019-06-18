@@ -11,50 +11,5 @@ _**with yarn**_<br>
 ```yarn add @ngrx/store ``` <br>
 _**with ng add**_<br>
 ```ng add @ngrx/store```
-### Let's take an example of ingredients
-> ingredient.actions.ts
-``` typescript
-import { Action } from '@ngrx/store';
-import { Ingredient } from '../../shared/ingredient.model';
 
-export const ADD_INGREDIENT = 'ADD_INGREDIENT';
 
-export class AddIngredient implements Action{
-  readonly type = ADD_INGREDIENT; //action type
-  payload:Ingredient //data
-}
-```
-here, the addIngredient implements Action, so we have to override the variable type from Action Interface.
-
-> ingredient.reducer.ts
-``` typescript
-import {Ingredient} from '../../shared/ingredient.model';
-import * as ingredientActions from './ingredient.actions';
-import { Action } from '@ngrx/store';
-
-const iState = {
-ingredients:[
-   new Ingredient('Apple',1),
-   new Ingredient('Bananas',2)
-]
-}
-
-export function IngredientReducer(state=iState,action:ingredientActions.AddIngredient){
-switch(action.type){
-   case ingredientActions.ADD_INGREDIENT:
-      return {
-         ...state, //coping the old state
-         ingredients:[...state.ingredients,action.payload]
-      };
-      default:
-         return state
-}
-}
-```
-> app.model.ts
-``` typescript
-import {StoreModule} from '@ngrx/store';
-imports:[
-StoreModule.forRoot({ingredients:IngredientReducer})
-]
-```
