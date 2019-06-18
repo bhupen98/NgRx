@@ -12,4 +12,37 @@ _**with yarn**_<br>
 _**with ng add**_<br>
 ```ng add @ngrx/store```
 
+## Setup
+> counter.reducer.ts
+``` typescript
+import {Action} from '@ngrx/store';
+
+export const INCREMENT = 'INCREMENT';
+export const DECREMENT = 'DECREMENT';
+
+export function counterReducer(state:number=0,action:Action){
+  switch(action.type){
+      case Increment:
+         return state+1;
+      case Decrement:
+         return state-1;
+      default:
+         return state;
+  }
+}
+```
+_In your app.module.ts, import those reducers and use the StoreModule.forRoot(reducers) function to provide them to Angular's injector_
+``` typescript
+import { NgModule } from '@angular/core'
+import { StoreModule } from '@ngrx/store';
+import { counterReducer } from './counter';
+
+@NgModule({
+  imports: [
+    BrowserModule,
+    StoreModule.forRoot({ counter: counterReducer })
+  ]
+})
+export class AppModule {}
+```
 
