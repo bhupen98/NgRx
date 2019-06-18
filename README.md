@@ -5,11 +5,11 @@
 * _State accessed with the Store, an observable of state and an observer of actions._
 
 ### Installation 
-_**with npm**_<br>
+**with npm**<br>
 ```npm install --save @ngrx/store ``` <br>
-_**with yarn**_<br>
+**with yarn**<br>
 ```yarn add @ngrx/store ``` <br>
-_**with ng add**_<br>
+**with ng add**<br>
 ```ng add @ngrx/store```
 
 ## Setup
