@@ -46,3 +46,9 @@ import { counterReducer } from './counter';
 export class AppModule {}
 ```
 _You can then inject the Store service into your components and services. Use store.select to select slice(s) of state:_
+> counter.component.ts
+``` typescript
+export class CounterComponent implements OnInit{
+
+}
+```
