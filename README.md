@@ -17,18 +17,43 @@
 ``` typescript
 import {Action} from '@ngrx/store';
 
-export const INCREMENT = 'INCREMENT';
-export const DECREMENT = 'DECREMENT';
+iState={
+   value:0
+}
 
-export function counterReducer(state:number=0,action:Action){
+export function counterReducer(state=iState,action:Action){
   switch(action.type){
       case Increment:
-         return state+1;
+         return {
+         ...state, //implementing rule of thumb
+         value:state.value+1
+         };
       case Decrement:
-         return state-1;
+         return {
+         ...state,
+         value:state.value-1
+         }
       default:
          return state;
   }
+}
+```
+_state changes with ngrx should always have to be immutable which means, must not edit the existing state._<br>
+_Rule of thumbs always copy the old state and then override what you wanna change._
+> counter.action.ts
+``` typescript
+import {Action} from '@ngrx/store'
+export const INCREMENT = 'INCREMENT';
+export const DECREMENT = 'DECREMENT';
+
+export class IncrementActions implements Action{
+readonly type = INCREMENT;
+constructor(private payload:number){}
+}
+
+export class DecrementActions implements Action{
+readonly type = DECREMENT;
+constructor(private payload:number){}
 }
 ```
 _In your app.module.ts, import those reducers and use the StoreModule.forRoot(reducers) function to provide them to Angular's injector_
@@ -49,6 +74,10 @@ _You can then inject the Store service into your components and services. Use st
 > counter.component.ts
 ``` typescript
 export class CounterComponent implements OnInit{
+constructor(){}
+ngOnInit(){
+
+}
 
 }
 ```
